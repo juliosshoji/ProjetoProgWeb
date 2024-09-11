@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TelaPrincipal</title>
+
+    <style>.container-principal {
+        width: 720px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f0f0f0;
+        display: flex;
+        gap: 10px; 
+        flex-wrap: wrap;
+    }
+    
+    .subcontainer-Jogo {
+        flex: 2; 
+        padding: 0;
+        text-align: center;
+    
+    }
+
+    .subcontainer-Jogo img {  
+        object-fit: cover; 
+    }
+
+    .container-direita {
+        flex: 1;
+        display: flex;
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    .subcontainer-Configuracoes {
+        flex: 1;
+        padding: 0;
+        background-color: #e0e0e0;
+        text-align: center;
+        display: inline-flex;
+        flex-direction: column;
+    }
+
+    .subcontainer-Historico {
+        flex: 0.5;
+        padding: 0;
+        margin: 0;
+        background-color: #e0e0e0;
+        text-align: center;
+    }
+
+    .subcontainer-Historico.p {
+       color: black;
+       text-align: center;
+    }
+
+    .subcontainer-Footer {
+    width: 100%; 
+    height: 74px; 
+    padding: 0;
+    background-color: #ccc;
+    text-align: center;
+    display: inline flex;
+    flex-direction: row;
+}
+
+.Button {
+    width: 120px;
+    height: 50px; 
+    margin: 10px auto; 
+    padding: 0; 
+    background-color: #a5a5a5; 
+    color: #ffffff; 
+    text-align: center; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    border: 1px solid #ffffff; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    font-family: Arial, sans-serif; 
+    cursor: pointer; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+</style>
+</head>
+<body>
+    <div class="container-principal">
+
+        <div class="subcontainer-Jogo">
+            <img src="https://www.scrapbook.com/products/cache/SBC_spc-30279_270739_0.jpg" alt="Imagem do jogo">
+        </div>
+
+        <div class="container-direita">
+        <div class="subcontainer-Configuracoes">
+            <div class="Button" style="background-color: red;">Início</div>
+            <div class="Button">00:30</div>
+            Tempo
+            <div class="Button">6x6</div>
+            Linha x Coluna
+            <div class="Button">5</div>
+            Número de Bombas
+            <div class="Button" style="background-color: rgb(0, 212, 11);">Modo Trapaça</div>
+
+        </div>
+        <div class="subcontainer-Historico">
+            <h3 style="background-color: black; color: white;">Histórico</h3>
+            <p>Gui123 - Vitória <br>
+                6x6, 5 bombas, 03:34, Rivotril,<br> 09/09 às 17:21h</p>
+        </div>
+        </div>
+
+        <div class="subcontainer-Footer">
+            <div class="Button">Desconectar</div>
+            <div class="Button">Ranking Global</div>
+            <div class="Button">Editar Perfil</div>
+        </div>
+    </div>
+</body>
+</html>
