@@ -2,20 +2,27 @@
 
 <html lang="pt-BR">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tela de Login do jogo Campo Minado</title>
-        <link rel="stylesheet" href="CampoMinado.css">
+        <link rel="stylesheet" href="TelaLoginCadastro.css">
     </head>
     <body>
-        <div class="container-principal">
-            <h1>Campo Minado</h1>
+        <div class="container-login">
+            <h1 style="color: red;">Campo Minado</h1>
             <h2>Faça Login na sua conta</h2>
-            <div class="text-space">
-                <a>Username ou e-mail</a>
+            <div class="input-box">                
+                <label for="username">Username or e-mail:</label>
+                <input type="text" id="username" name="usernamebox">
+            <div class="input-box">
+                <label for="password">Password:</label>
+                <input type="text" id="password" name="passwordbox">
             </div>
             <div class="text-space">
-                <a>Senha</a>
+                <a href="TelaCadastro.html" target="_self">Ou registre-se</a>
+                <br><br>
+                <a href="TelaJogo.html" target="_self">Confirmar</a>
             </div>
-            <a href="TelaCadastro.html" target="_self">Ou registre-se</a>a
         </div>
     </body>
 </html>
