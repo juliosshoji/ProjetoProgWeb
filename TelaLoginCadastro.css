@@ -32,15 +32,16 @@ body {
 }
 
 .text-space {
-    width: max-content;
-    position: absolute;
+    width: 16%;
+    position: relative;
     background-color: darkgray;
     border-radius: 2vw;
     border-style: outset;
     margin: 1vw;
     vertical-align: central;
-    left: 25%;
-    top: 20vw;
+    left: 38.5%;
+    top: 5%;
+    text-align: center;
 }
 
 .container-login {
@@ -50,13 +51,16 @@ body {
     position: relative;
     left: 25%;
     top: 25%;
-    background-color: blue;
 }
 
 .input-box {
-    width: 50%;
+    width: 24;
     margin: 1vw;
-    left: 25%;
-    top: 10vw;
-    position:absolute;
+    left: 36%;
+    top: 1%;
+    position: relative;
+}
+input, label {
+    display: block;
+    margin: 0.5vw;
 }
