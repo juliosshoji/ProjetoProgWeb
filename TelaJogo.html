@@ -5,112 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TelaPrincipal</title>
 
-    <style>.container-principal {
-        width: 720px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f0f0f0;
-        display: flex;
-        gap: 10px; 
-        flex-wrap: wrap;
-    }
-    
-    .subcontainer-Jogo {
-        flex: 2; 
-        padding: 0;
-        text-align: center;
-    
-    }
+    <style>
+        .container-principal {
+            width: 720px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-    .subcontainer-Jogo img {  
-        object-fit: cover; 
-    }
+        .subcontainer-Jogo {
+            flex: 2;
+            padding: 0;
+            background-image: url("https://www.scrapbook.com/products/cache/SBC_spc-30279_270739_0.jpg");
+            background-size: 400px;
+            background-position: center;
+            width: 100%;
+            overflow: hidden;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        }
 
-    .container-direita {
-        flex: 1;
-        display: flex;
-        flex-direction: column; 
-        gap: 10px;
-    }
+        table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
 
-    .subcontainer-Configuracoes {
-        flex: 1;
-        padding: 0;
-        background-color: #e0e0e0;
-        text-align: center;
-        display: inline-flex;
-        flex-direction: column;
-    }
+        td {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(52, 152, 219, 0.5);
+            border: 1px solid #333;
+            text-align: center;
+            vertical-align: middle;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            aspect-ratio: 1 / 1;
+        }
 
-    .subcontainer-Historico {
-        flex: 0.5;
-        padding: 0;
-        margin: 0;
-        background-color: #e0e0e0;
-        text-align: center;
-    }
+        .container-direita {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    .subcontainer-Historico.p {
-       color: black;
-       text-align: center;
-    }
+        .subcontainer-Configuracoes {
+            flex: 1;
+            padding: 0;
+            background-color: #e0e0e0;
+            text-align: center;
+            display: inline-flex;
+            flex-direction: column;
+        }
 
-    .subcontainer-Footer {
-    width: 100%; 
-    height: 74px; 
-    padding: 0;
-    background-color: #ccc;
-    text-align: center;
-    display: inline flex;
-    flex-direction: row;
-}
+        .subcontainer-Historico {
+            flex: 0.5;
+            padding: 0;
+            margin: 0;
+            background-color: #e0e0e0;
+            text-align: center;
+        }
 
-.Button {
-    width: 120px;
-    height: 50px; 
-    margin: 10px auto; 
-    padding: 0; 
-    background-color: #a5a5a5; 
-    color: #ffffff; 
-    text-align: center; 
-    display: inline-flex; 
-    align-items: center; 
-    justify-content: center; 
-    border: 1px solid #ffffff; 
-    border-radius: 5px; 
-    font-size: 16px; 
-    font-family: Arial, sans-serif; 
-    cursor: pointer; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    transition: background-color 0.3s, transform 0.3s;
-}
+        .subcontainer-Footer {
+            width: 100%;
+            height: 74px;
+            padding: 0;
+            background-color: #ccc;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+        }
 
-</style>
+        .Button {
+            width: 120px;
+            height: 50px;
+            margin: 10px auto;
+            padding: 0;
+            background-color: #a5a5a5;
+            color: #ffffff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .square {
+            background-color: rgba(52, 152, 219, 0.5);
+            border: 1px solid #333;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            aspect-ratio: 1 / 1; 
+        }
+
+    </style>
 </head>
 <body>
     <div class="container-principal">
 
         <div class="subcontainer-Jogo">
-            <img src="https://www.scrapbook.com/products/cache/SBC_spc-30279_270739_0.jpg" alt="Imagem do jogo">
+            <table>
+                <tr>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                </tr>
+                <tr>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                </tr>
+                <tr>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                    <td class="square"></td>
+                </tr>
+            </table>
         </div>
 
         <div class="container-direita">
-        <div class="subcontainer-Configuracoes">
-            <div class="Button" style="background-color: red;">Início</div>
-            <div class="Button">00:30</div>
-            Tempo
-            <div class="Button">6x6</div>
-            Linha x Coluna
-            <div class="Button">5</div>
-            Número de Bombas
-            <div class="Button" style="background-color: rgb(0, 212, 11);">Modo Trapaça</div>
-
-        </div>
-        <div class="subcontainer-Historico">
-            <h3 style="background-color: black; color: white;">Histórico</h3>
-            <p>Gui123 - Vitória <br>
-                6x6, 5 bombas, 03:34, Rivotril,<br> 09/09 às 17:21h</p>
-        </div>
+            <div class="subcontainer-Configuracoes">
+                <div class="Button" style="background-color: red;">Início</div>
+                <div class="Button">00:30</div>
+                Tempo
+                <div class="Button">6x6</div>
+                Linha x Coluna
+                <div class="Button">5</div>
+                Número de Bombas
+                <div class="Button" style="background-color: rgb(0, 212, 11);">Modo Trapaça</div>
+            </div>
+            <div class="subcontainer-Historico">
+                <h3 style="background-color: black; color: white;">Histórico</h3>
+                <p>Gui123 - Vitória <br>
+                    6x6, 5 bombas, 03:34, Rivotril,<br> 09/09 às 17:21h</p>
+            </div>
         </div>
 
         <div class="subcontainer-Footer">
