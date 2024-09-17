@@ -69,5 +69,6 @@ td {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    text-align: center;
 }
 
