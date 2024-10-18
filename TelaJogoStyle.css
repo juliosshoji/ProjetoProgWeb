@@ -1,3 +1,4 @@
+
 .container-principal {
     width: 720px;
     margin: 0 auto;
@@ -16,15 +17,16 @@
     background-position: center;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
 }
 
-table {
+#tableJogo {
     width: 100%;
     height: 100%;
     border-collapse: collapse;
     table-layout: fixed;
+    overflow: auto;
 }
 
 td {
@@ -134,4 +136,10 @@ a {
     font-size: 40px; 
     font-weight: bold;
     line-height: 70px;
+}
+
+.squareBomba {
+    background-color: red; 
+    color: black;
+    text-align: center;
 }
