@@ -4,32 +4,30 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tela de Login do jogo Campo Minado</title>
+        <title>Login Campo Minado</title>
         <link rel="stylesheet" href="./StyleInformacoes.css">
+        <script src="./VerificacaoEntradas.js"></script>
     </head>
     <body>
         <div class="container">
             <h1 style="color: red;">Campo Minado</h1>
             <h2>Faça Login na sua conta</h2>
-            <form action="#" method="POST">
+            <p id="message"></p>
+            <form name="login" onsubmit="return validateLoginInput()" action="TelaJogo.html">
                 <div class="form-group">                
                     <label for="username">Usuário ou e-mail:</label>
-                    <input type="text" id="username" name="usernamebox">
+                    <input type="text" id="usernamebox" name="usernamebox">
                 </div>
                 
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="passwordbox">
+                    <input type="password" id="passwordbox" name="passwordbox">
                 </div>
                 <div class="button-container">
                     <a href="./TelaCadastro.html" target="_self">Ou registre-se</a>
                 </div>
                 <div class="button-container">
-                    <a href="./TelaJogo.html">
-                        <div class="Button">
-                            Confirmar
-                        </div>
-                    </a>
+                        <input type="submit" value="Confirmar">
                 </div>
             </form>
         </div>

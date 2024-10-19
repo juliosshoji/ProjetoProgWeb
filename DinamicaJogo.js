@@ -1,207 +1,172 @@
-let timerInterval;
-let tempoPassado = 0;
-let tempoRestante = 0;
+"use strict";
 
-function iniciarContagemTempo() {
-    const botaoTempo = document.querySelector('.Button.tempo');
-    tempoPassado = 0; 
+let timerInterval;
+let elapsedTime = 0;
+let remainingTime = 0;
+
+function startTimer() {
+    const timeButton = document.querySelector('.Button.tempo');
+    elapsedTime = 0; 
     clearInterval(timerInterval); 
 
     timerInterval = setInterval(() => {
-        tempoPassado++;
-        const minutos = Math.floor(tempoPassado / 60);
-        const segundos = tempoPassado % 60;
-        botaoTempo.textContent = `${minutos < 10 ? '0' + minutos : minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
+        elapsedTime++;
+        const minutes = Math.floor(elapsedTime / 60);
+        const seconds = elapsedTime % 60;
+        timeButton.textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
     }, 1000);
 }
 
-function iniciarContagemRegressiva(duracao) {
-    const botaoTempo = document.querySelector('.Button.tempo');
-    tempoRestante = duracao;
+function startCountdown(duration) {
+    const timeButton = document.querySelector('.Button.tempo');
+    remainingTime = duration;
     clearInterval(timerInterval);
 
     timerInterval = setInterval(() => {
-        tempoRestante--;
-        const minutos = Math.floor(tempoRestante / 60);
-        const segundos = tempoRestante % 60;
-        botaoTempo.textContent = `${minutos < 10 ? '0' + minutos : minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
+        remainingTime--;
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timeButton.textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
         
-        if (tempoRestante <= 0) {
+        if (remainingTime <= 0) {
             clearInterval(timerInterval);
             alert('O tempo acabou! Você perdeu.');
-            finalizarJogo(); 
+            endGame(); 
         }
     }, 1000);
 }
 
-function gerarBombas(numBombas, linhas, colunas) {
-    const bombas = new Set()
-    while (bombas.size < numBombas) {
-        const linhaAleatoria = Math.floor(Math.random() * linhas);
-        const colunaAleatoria = Math.floor(Math.random() * colunas);
-        const posicao = `${linhaAleatoria},${colunaAleatoria}`;
-        bombas.add(posicao);
+function generateBombs(numBombs, rows, cols) {
+    const bombs = new Set();
+    while (bombs.size < numBombs) {
+        const randomRow = Math.floor(Math.random() * rows);
+        const randomCol = Math.floor(Math.random() * cols);
+        const position = `${randomRow},${randomCol}`;
+        bombs.add(position);
     }
-    return bombas;
+    return bombs;
 }
 
-function contarBombasAdjacentes(linha, coluna, linhas, colunas, bombas) {
-    let bombasAdjacentes = 0;
+function countAdjacentBombs(row, col, rows, cols, bombs) {
+    let adjacentBombs = 0;
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
-            const novaLinha = linha + i;
-            const novaColuna = coluna + j;
-            const posicao = `${novaLinha},${novaColuna}`;
-            if (novaLinha >= 0 && novaLinha < linhas && novaColuna >= 0 && novaColuna < colunas) {
-                if (bombas.has(posicao)) {
-                    bombasAdjacentes++;
+            const newRow = row + i;
+            const newCol = col + j;
+            const position = `${newRow},${newCol}`;
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                if (bombs.has(position)) {
+                    adjacentBombs++;
                 }
             }
         }
     }
-    return bombasAdjacentes;
+    return adjacentBombs;
 }
 
-function criarTabuleiro(linhas, colunas, bombas) { 
-    const Tabuleiro = document.getElementById('tableJogo');
-    Tabuleiro.innerHTML = ''; 
-    for (let i = 0; i < linhas; i++) {
-        const linha = document.createElement('tr');
-        for (let n = 0; n < colunas; n++) {
-            const coluna = document.createElement('td');
-            coluna.classList.add('squareEscondido');
-            coluna.dataset.posicao = `${i},${n}`;
-            linha.appendChild(coluna);
-            const posicao = `${i},${n}`;
-            if (bombas.has(posicao)) {
-                coluna.dataset.bomba = true; 
+function createBoard(rows, cols, bombs) { 
+    const board = document.getElementById('tableJogo');
+    board.innerHTML = ''; 
+    for (let i = 0; i < rows; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < cols; j++) {
+            const cell = document.createElement('td');
+            cell.classList.add('squareEscondido');
+            cell.dataset.position = `${i},${j}`;
+            row.appendChild(cell);
+            const position = `${i},${j}`;
+            if (bombs.has(position)) {
+                cell.dataset.bomb = true; 
             } else {
-                const bombasAdjacentes = contarBombasAdjacentes(i, n, linhas, colunas, bombas);
-                coluna.dataset.bombasAdjacentes = bombasAdjacentes;
+                const adjacentBombs = countAdjacentBombs(i, j, rows, cols, bombs);
+                cell.dataset.adjacentBombs = adjacentBombs;
             }
         }
-        Tabuleiro.appendChild(linha); 
+        board.appendChild(row); 
     }
 }
 
-function revelarCelula(elemento, linhas, colunas, bombas) {
-    if (!elemento.classList.contains('squareEscondido')) {
+function revealCell(element, rows, cols, bombs) {
+    if (!element.classList.contains('squareEscondido')) {
         return;
     }
-    elemento.classList.remove('squareEscondido');
-    if (elemento.dataset.bomba) {
-        elemento.classList.add('squareBomba'); 
-        elemento.textContent = '💣';
+    element.classList.remove('squareEscondido');
+    if (element.dataset.bomb) {
+        element.classList.add('squareBomba'); 
+        element.textContent = '💣';
         alert('Você clicou em uma bomba! Você perdeu.');
-        finalizarJogo(); 
+        endGame(); 
     } else {
-        const bombasAdjacentes = parseInt(elemento.dataset.bombasAdjacentes, 10);
-        if (bombasAdjacentes > 0) {
-            elemento.textContent = bombasAdjacentes;
+        const adjacentBombs = parseInt(element.dataset.adjacentBombs, 10);
+        if (adjacentBombs > 0) {
+            element.textContent = adjacentBombs;
         } else {
-            elemento.classList.add('squareSemNada');
-            propagarRevelacao(elemento, linhas, colunas, bombas);
+            element.classList.add('squareSemNada');
+            propagateReveal(element, rows, cols, bombs);
+        }
+
+        if (document.querySelectorAll('td.squareEscondido').length === document.querySelectorAll('td[data-bomb="true"]').length) {
+            victory(); 
         }
     }
 }
 
-function propagarRevelacao(elemento, linhas, colunas, bombas) {
-    const [linha, coluna] = elemento.dataset.posicao.split(',').map(Number);
+function victory() {
+    alert('Parabéns! Você venceu o jogo!');
+    endGame();
+}
+
+function propagateReveal(element, rows, cols, bombs) {
+    const [row, col] = element.dataset.position.split(',').map(Number);
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
-            const novaLinha = linha + i;
-            const novaColuna = coluna + j;
-            if (novaLinha >= 0 && novaLinha < linhas && novaColuna >= 0 && novaColuna < colunas) {
-                const vizinho = document.querySelector(`td[data-posicao="${novaLinha},${novaColuna}"]`);
-                if (vizinho && vizinho.classList.contains('squareEscondido')) {
-                    revelarCelula(vizinho, linhas, colunas, bombas);
+            const newRow = row + i;
+            const newCol = col + j;
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                const neighbor = document.querySelector(`td[data-position="${newRow},${newCol}"]`);
+                if (neighbor && neighbor.classList.contains('squareEscondido')) {
+                    revealCell(neighbor, rows, cols, bombs);
                 }
             }
         }
     }
 }
 
-function configurarJogo() {
-    const quadrados = document.querySelectorAll('td');
-    quadrados.forEach(quadrado => {
-        quadrado.addEventListener('click', function() {
-            const InputTamanhoJogo = document.getElementById('tamanhoJogo').value;
-            const [linhas, colunas] = InputTamanhoJogo.split('x').map(Number);
-            const bombas = new Set(Array.from(document.querySelectorAll('[data-bomba="true"]')).map(el => el.dataset.posicao));
-            revelarCelula(quadrado, linhas, colunas, bombas);
+function setupGame() {
+    const squares = document.querySelectorAll('td');
+    squares.forEach(square => {
+        square.addEventListener('click', function() {
+            const gameSizeInput = document.getElementById('tamanhoJogo').value;
+            const [rows, cols] = gameSizeInput.split('x').map(Number);
+            const bombs = new Set(Array.from(document.querySelectorAll('[data-bomb="true"]')).map(el => el.dataset.position));
+            revealCell(square, rows, cols, bombs);
         });
     });
 }
 
-function modoTrapaca() {
-    const quadrados = document.querySelectorAll('td.squareEscondido');
-    
-    quadrados.forEach(quadrado => {
-        if (quadrado.dataset.bomba) {
-            quadrado.textContent = '💣';
-        } else {
-            const bombasAdjacentes = quadrado.dataset.bombasAdjacentes;
-            quadrado.textContent = bombasAdjacentes > 0 ? bombasAdjacentes : '';
-        }
-    });
+function startGame() {
+    const startButton = document.getElementById('botaoInicio');
+    startButton.addEventListener('click', function() {
+        const gameSizeInput = document.getElementById('tamanhoJogo').value;
+        const [rows, cols] = gameSizeInput.split('x').map(Number);
+        const numBombs = parseInt(document.getElementById('botaoBomba').value, 10);
 
-    setTimeout(() => {
-        quadrados.forEach(quadrado => {
-            quadrado.textContent = ''; 
-        });
-    }, 2000); 
-}
-
-function iniciarJogo() {
-    const botaoInicio = document.getElementById('botaoInicio');
-    const botaoTrapaca = document.querySelector('.Button[style*="rgb(0, 212, 11)"]');
-    const botaoRivotril = document.getElementById('botaoRivotril');
-    
-    botaoInicio.addEventListener('click', function() {
-        const InputTamanhoJogo = document.getElementById('tamanhoJogo').value;
-        const [linhas, colunas] = InputTamanhoJogo.split('x').map(Number);
-        const numBombas = parseInt(document.getElementById('botaoBomba').value, 10);
-
-        if (isNaN(linhas) || isNaN(colunas) || isNaN(numBombas)) {
+        if (isNaN(rows) || isNaN(cols) || isNaN(numBombs)) {
             alert('Por favor, insira um valor válido para o tamanho do jogo.');
             return;
         }
 
-        const bombas = gerarBombas(numBombas, linhas, colunas); 
-        criarTabuleiro(linhas, colunas, bombas); 
-        configurarJogo();
-        iniciarContagemTempo();
-        botaoInicio.style.backgroundColor = '#8B0000';
-        botaoInicio.disabled = true;
-    });
-
-    botaoTrapaca.addEventListener('click', modoTrapaca);
-
-    botaoRivotril.addEventListener('click', function() {
-        const InputTamanhoJogo = document.getElementById('tamanhoJogo').value;
-        const [linhas, colunas] = InputTamanhoJogo.split('x').map(Number);
-        const numBombas = parseInt(document.getElementById('botaoBomba').value, 10);
-        const tempoMaximo = linhas * colunas; 
-
-        if (isNaN(linhas) || isNaN(colunas) || isNaN(numBombas)) {
-            alert('Por favor, insira um valor válido para o tamanho do jogo.');
-            return;
-        }
-
-        const bombas = gerarBombas(numBombas, linhas, colunas); 
-        criarTabuleiro(linhas, colunas, bombas); 
-        configurarJogo();
-        iniciarContagemRegressiva(tempoMaximo); 
-        botaoRivotril.style.backgroundColor = '#8B0000';
-        botaoRivotril.disabled = true;
+        const bombs = generateBombs(numBombs, rows, cols); 
+        createBoard(rows, cols, bombs); 
+        setupGame();
+        startTimer();
+        startButton.disabled = true;
     });
 }
 
-function finalizarJogo() {
+function endGame() {
     clearInterval(timerInterval);
-    alert("Fim de jogo!"); 
-    document.getElementById('botaoInicio').disabled = false;
-    document.getElementById('botaoRivotril').disabled = false;
+    window.location.href = "TelaFimDeJogo.html";
 }
 
-window.onload = iniciarJogo;
+window.onload = startGame;
