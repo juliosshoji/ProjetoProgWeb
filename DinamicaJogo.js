@@ -3,6 +3,7 @@
 let timerInterval;
 let elapsedTime = 0;
 let remainingTime = 0;
+let rivotrilMode = false;
 
 function startTimer() {
     const timeButton = document.querySelector('.Button.tempo');
@@ -146,6 +147,8 @@ function setupGame() {
 
 function startGame() {
     const startButton = document.getElementById('botaoInicio');
+    const rivotrilToggle = document.getElementById('botaoRivotril');
+
     startButton.addEventListener('click', function() {
         const gameSizeInput = document.getElementById('tamanhoJogo').value;
         const [rows, cols] = gameSizeInput.split('x').map(Number);
@@ -159,9 +162,38 @@ function startGame() {
         const bombs = generateBombs(numBombs, rows, cols); 
         createBoard(rows, cols, bombs); 
         setupGame();
-        startTimer();
+
+        if (rivotrilMode) {
+            const maxTime = rows * cols;
+            startCountdown(maxTime);
+        } else {
+            startTimer();
+        }
         startButton.disabled = true;
     });
+
+    rivotrilToggle.addEventListener('click', function() {
+        rivotrilMode = !rivotrilMode;
+        rivotrilToggle.style.backgroundColor = rivotrilMode ? 'green' : 'red';
+    });
+}
+
+function cheatMode() {
+    const squares = document.querySelectorAll('td.squareEscondido');
+    squares.forEach(square => {
+        if (square.dataset.bomb) {
+            square.textContent = '💣';
+        } else {
+            const adjacentBombs = square.dataset.adjacentBombs;
+            square.textContent = adjacentBombs > 0 ? adjacentBombs : '';
+        }
+    });
+
+    setTimeout(() => {
+        squares.forEach(square => {
+            square.textContent = ''; 
+        });
+    }, 2000); 
 }
 
 function endGame() {
