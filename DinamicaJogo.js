@@ -174,7 +174,7 @@ function startGame() {
 
     rivotrilToggle.addEventListener('click', function() {
         rivotrilMode = !rivotrilMode;
-        rivotrilToggle.style.backgroundColor = rivotrilMode ? 'green' : 'red';
+        rivotrilToggle.style.backgroundColor = rivotrilMode ? 'green' : '';
     });
 }
 
