@@ -6,7 +6,7 @@ let remainingTime = 0;
 let rivotrilMode = false;
 
 function startTimer() {
-    const timeButton = document.querySelector('.Button.tempo');
+    const timeButton = document.querySelector('.button.tempo');
     elapsedTime = 0; 
     clearInterval(timerInterval); 
 
@@ -19,7 +19,7 @@ function startTimer() {
 }
 
 function startCountdown(duration) {
-    const timeButton = document.querySelector('.Button.tempo');
+    const timeButton = document.querySelector('.button.tempo');
     remainingTime = duration;
     clearInterval(timerInterval);
 
@@ -72,7 +72,7 @@ function createBoard(rows, cols, bombs) {
         const row = document.createElement('tr');
         for (let j = 0; j < cols; j++) {
             const cell = document.createElement('td');
-            cell.classList.add('squareEscondido');
+            cell.classList.add('square-escondido');
             cell.dataset.position = `${i},${j}`;
             row.appendChild(cell);
             const position = `${i},${j}`;
@@ -88,12 +88,12 @@ function createBoard(rows, cols, bombs) {
 }
 
 function revealCell(element, rows, cols, bombs) {
-    if (!element.classList.contains('squareEscondido')) {
+    if (!element.classList.contains('square-escondido')) {
         return;
     }
-    element.classList.remove('squareEscondido');
+    element.classList.remove('square-escondido');
     if (element.dataset.bomb) {
-        element.classList.add('squareBomba'); 
+        element.classList.add('square-bomba'); 
         element.textContent = '💣';
         alert('Você clicou em uma bomba! Você perdeu.');
         endGame(); 
@@ -102,11 +102,11 @@ function revealCell(element, rows, cols, bombs) {
         if (adjacentBombs > 0) {
             element.textContent = adjacentBombs;
         } else {
-            element.classList.add('squareSemNada');
+            element.classList.add('square-sem-nada');
             propagateReveal(element, rows, cols, bombs);
         }
 
-        if (document.querySelectorAll('td.squareEscondido').length === document.querySelectorAll('td[data-bomb="true"]').length) {
+        if (document.querySelectorAll('td.square-escondido').length === document.querySelectorAll('td[data-bomb="true"]').length) {
             victory(); 
         }
     }
@@ -125,7 +125,7 @@ function propagateReveal(element, rows, cols, bombs) {
             const newCol = col + j;
             if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
                 const neighbor = document.querySelector(`td[data-position="${newRow},${newCol}"]`);
-                if (neighbor && neighbor.classList.contains('squareEscondido')) {
+                if (neighbor && neighbor.classList.contains('square-escondido')) {
                     revealCell(neighbor, rows, cols, bombs);
                 }
             }
@@ -179,7 +179,7 @@ function startGame() {
 }
 
 function cheatMode() {
-    const squares = document.querySelectorAll('td.squareEscondido');
+    const squares = document.querySelectorAll('td.square-escondido');
     squares.forEach(square => {
         if (square.dataset.bomb) {
             square.textContent = '💣';

@@ -8,7 +8,6 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
     background-color: #5C5C5C;
     display: flex;
     justify-content: center;
@@ -37,14 +36,10 @@ h1 {
 
 h2 {
     text-align: center;
-    width: auto;
     margin: 1vw;
-    vertical-align: text-top;
     font-size: 1vw;
     font-family: 'Times New Roman', Times, serif;
-    position: relative;
 }
-
 
 form {
     display: flex;
@@ -54,16 +49,16 @@ form {
 .form-group {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Alinha os itens à esquerda */
+    justify-content: flex-start;
     margin-bottom: 1vw;
 }
 
 label {
-    width: 10vw; /* Define uma largura fixa para o rótulo */
+    width: 10vw;
     text-transform: uppercase;
     color: #FFFFFF;
     font-size: 0.8vw;
-    margin-right: 1vw; /* Espaço entre o rótulo e o campo de entrada */
+    margin-right: 1vw;
     text-align: right;
 }
 
@@ -74,33 +69,28 @@ input[type="email"],
 input[type="password"] {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #000000; /* Cor da borda (mais escura) */
+    border: 1px solid #000000;
     border-radius: 3px;
-    background-color: #555555; /* Cor de fundo (mais clara que a borda) */
+    background-color: #555555;
     color: #FFFFFF;
     font-size: 1vw;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="tel"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #333333; /* Borda mais escura ao focar */
+input:focus {
+    border-color: #333333;
 }
 
 .button-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 0.6vw; /* Espaço entre o formulário e o botão */
+    margin-top: 0.6vw;
 }
 
-.Tempo {
+.tempo {
     width: 8vw;
     height: 3vw;
     margin: 0.2vw;
-    padding: 0;
     background-color: #a5a5a5;
     color: #ffffff;
     text-align: center;
@@ -110,16 +100,14 @@ input[type="password"]:focus {
     border: 1px solid #ffffff;
     border-radius: 5px;
     font-size: 1vw;
-    font-family: Arial, sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.Button {
+.button {
     width: 8vw;
     height: 2.5vw;
     margin: 1vw;
-    padding: 0;
     background-color: #a5a5a5;
     color: #ffffff;
     text-align: center;
@@ -129,18 +117,19 @@ input[type="password"]:focus {
     border: 1px solid #ffffff;
     border-radius: 5px;
     font-size: 1vw;
-    font-family: Arial, sans-serif;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.Button:hover {
+.button:hover {
     background-color: #45A049;
 }
 
 #restart-button {
+    height: 3vw;
     background-color: #a5a5a5;
+    margin: 0.5vw;
 }
 
 #restart-button:hover {
@@ -149,6 +138,8 @@ input[type="password"]:focus {
 
 #exit-button {
     background-color: #a5a5a5;
+    height: 3vw;
+    margin: 0.5vw;
 }
 
 #exit-button:hover {
@@ -169,7 +160,6 @@ th {
     vertical-align: middle;
     height: 2vw;
     text-align: center;
-    margin: 1vw;
     text-transform: uppercase;
     background-color: rgba(52, 152, 219, 0.5);
     border: 1px solid #333;
@@ -183,8 +173,8 @@ table {
     text-align: center;
 }
 
-.voltar{
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+.voltar {
+    font-family: 'Comic Sans MS', cursive;
     display: block;
     width: 8vw;
     margin: auto;
@@ -198,7 +188,6 @@ table {
     text-align: center;
 }
 
-
 .container-principal {
     width: 65%;
     height: 80%;
@@ -210,7 +199,7 @@ table {
     flex-wrap: wrap;
 }
 
-.subcontainer-Jogo {
+.subcontainer-jogo {
     flex: 2;
     padding: 0;
     background-image: url("https://www.scrapbook.com/products/cache/SBC_spc-30279_270739_0.jpg");
@@ -219,15 +208,14 @@ table {
     width: 70%;
     height: 80%;
     overflow: scroll;
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
 }
 
 #tableJogo {
     width: 100%;
     height: 30vw;
     border-collapse: collapse;
-    table-layout: fixed;
-    overflow-y: scroll;
+    table-layout:fixed;
+    overflow: auto;
 }
 
 td {
@@ -238,7 +226,6 @@ td {
     text-align: center;
     vertical-align: middle;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    aspect-ratio: 1 / 1;
 }
 
 a {
@@ -252,30 +239,28 @@ a {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-.subcontainer-Configuracoes {
+.subcontainer-configuracoes {
     flex: 1;
     padding: 0;
     background-color: #edffea;
     text-align: center;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.subcontainer-Historico {
+.subcontainer-historico {
     flex: 0.5;
     padding: 0;
-    margin: 0;
     height: 20%;
     background-color: #e0e0e0;
     text-align: center;
 }
 
-.subcontainer-Footer {
+.subcontainer-footer {
     width: 100%;
     height: 5vw;
     padding: 0;
@@ -283,52 +268,35 @@ a {
     text-align: center;
     display: flex;
     justify-content: space-around;
-    margin: auto;
     align-items: center;
 }
 
-.squarePrimeiroClique {
-    background-color: rgba(0, 126, 111, 0.5);
-    border: 1px solid #333;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    aspect-ratio: 1 / 1; 
-}
 
-.squareAmareloEmVolta {
-    background-color: rgba(167, 182, 0, 0.5);
-    border: 1px solid #333;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    aspect-ratio: 1 / 1; 
-}
 
-.squareSemNada {
+.square-sem-nada {
     background-color: rgba(0, 126, 5, 0.1);
     border: 1px solid #333;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    aspect-ratio: 1 / 1; 
-    text-align: center;  
-    vertical-align: middle; 
-    font-size: 2vw; 
+    text-align: center;
+    font-size: 2vw;
     font-weight: bold;
     line-height: 3vw;
-    color:white;
+    color: white;
 }
 
-.squareEscondido {
+.square-escondido {
     background-color: rgba(0, 126, 5, 0.6);
     border: 1px solid #333;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    aspect-ratio: 1 / 1; 
-    text-align: center;  
-    vertical-align: middle; 
-    color:white;
-    font-size: 2vw; 
+    text-align: center;
+    font-size: 2vw;
     font-weight: bold;
     line-height: 3vw;
+    color: white;
 }
 
-.squareBomba {
-    background-color: red; 
+.square-bomba {
+    background-color: red;
     color: black;
     text-align: center;
 }
@@ -341,7 +309,6 @@ input[type="submit"] {
     width: 8vw;
     height: 2vw;
     margin: 0.5vw auto;
-    padding: 0;
     background-color: #a5a5a5;
     color: #ffffff;
     text-align: center;
