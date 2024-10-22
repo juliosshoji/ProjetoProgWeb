@@ -1,0 +1,159 @@
+<!--Higor Gabriel Santana Magalhães RA: 247483-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil - Campo Minado</title>
+    <link rel="stylesheet" href="./StyleInformacoes.css">
+    <script>
+        // Variáveis simulando as informações atuais do usuário
+        let nomeAtual = "Neymar Junior";
+        let emailAtual = "neymar.njr@gmail.com";
+        let dataNascimentoAtual = "1992-02-05";
+        let cpfAtual = "123.456.789-00";
+        let telefoneAtual = "5511887654567";
+        let nomeUsuarioAtual = "NJR";
+
+        // Função para carregar as informações atuais no formulário
+        function carregarInformacoesAtuais() {
+            document.getElementById("namebox").value = nomeAtual;
+            document.getElementById("emailbox").value = emailAtual;
+            document.getElementById("birthdaybox").value = dataNascimentoAtual;
+            document.getElementById("cpfbox").value = cpfAtual;
+            document.getElementById("telefonebox").value = telefoneAtual;
+            document.getElementById("usernamebox").value = nomeUsuarioAtual;
+        }
+
+        // Função para validar os campos
+        function validarEntradas() {
+            const nome = document.getElementById("namebox").value;
+            const email = document.getElementById("emailbox").value;
+            const cpf = document.getElementById("cpfbox").value;
+            const telefone = document.getElementById("telefonebox").value;
+            const nomeUsuario = document.getElementById("usernamebox").value;
+            const senha = document.getElementById("passwordbox").value;
+            const confirmarSenha = document.getElementById("confirmpasswordbox").value;
+
+            // Verifica se todos os campos obrigatórios estão preenchidos
+            if (!nome || !email || !cpf || !telefone || !nomeUsuario) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                return false;
+            }
+
+            // Verifica se o e-mail tem um formato válido
+            const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexEmail.test(email)) {
+                alert("Por favor, insira um e-mail válido.");
+                return false;
+            }
+
+            // Verifica se as senhas coincidem, se forem preenchidas
+            if (senha || confirmarSenha) {
+                if (senha !== confirmarSenha) {
+                    alert("As senhas não coincidem.");
+                    return false;
+                }
+            }
+
+            // Verifica se o CPF tem o formato esperado (simples validação de formato)
+            const regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+            if (!regexCPF.test(cpf)) {
+                alert("Por favor, insira um CPF válido no formato XXX.XXX.XXX-XX.");
+                return false;
+            }
+
+            // Verifica se o telefone está no formato esperado
+            const regexTelefone = /^\d{13}$/; // Exemplo de formato de telefone com 13 dígitos
+            if (!regexTelefone.test(telefone)) {
+                alert("Por favor, insira um número de telefone válido com 13 dígitos, incluindo o código do país.");
+                return false;
+            }
+
+            return true; // Se tudo estiver válido
+        }
+
+        // Função para salvar as novas informações e atualizar as variáveis
+        function salvarAlteracoes(event) {
+            event.preventDefault(); // Previne o comportamento padrão do formulário
+
+            // Valida as entradas antes de salvar
+            if (!validarEntradas()) {
+                return; // Se a validação falhar, não salva as alterações
+            }
+
+            // Atualiza as variáveis com os novos valores inseridos pelo usuário
+            nomeAtual = document.getElementById("namebox").value;
+            emailAtual = document.getElementById("emailbox").value;
+            dataNascimentoAtual = document.getElementById("birthdaybox").value;
+            cpfAtual = document.getElementById("cpfbox").value;
+            telefoneAtual = document.getElementById("telefonebox").value;
+            nomeUsuarioAtual = document.getElementById("usernamebox").value;
+
+            // Exibe uma mensagem de confirmação (simulando salvamento)
+            alert("Informações salvas com sucesso!");
+
+            // Redireciona para a TelaJogo após a confirmação
+            window.location.href = "TelaJogo.html"; // Aqui você coloca o caminho correto para a TelaJogo
+        }
+
+        // Chama a função carregar as informações assim que a página carregar
+        window.onload = carregarInformacoesAtuais;
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="color: red;">Campo Minado</h1>
+        <h2>Editar Perfil</h2>
+        <form name="editProfile" onsubmit="salvarAlteracoes(event)">
+            <div class="form-group">
+                <label for="namebox">Nome Completo:</label>
+                <input type="text" id="namebox" name="namebox">
+            </div>
+
+            <div class="form-group">
+                <label for="emailbox">E-mail:</label>
+                <input type="email" id="emailbox" name="emailbox">
+            </div>
+
+            <div class="form-group">
+                <label for="birthdaybox">Data de nascimento (Ex.: 01/01/2001):</label>
+                <input type="date" id="birthdaybox" name="birthdaybox">
+            </div>
+
+            <div class="form-group">
+                <label for="cpfbox">Digite seu CPF:</label>
+                <input type="text" id="cpfbox" name="cpfbox">
+            </div>
+
+            <div class="form-group">
+                <label for="telefonebox">Telefone (Ex.: 5511999999999):</label>
+                <input type="tel" id="telefonebox" name="telefonebox">
+            </div>
+
+            <div class="form-group">
+                <label for="usernamebox">Nome de Usuário:</label>
+                <input type="text" id="usernamebox" name="usernamebox">
+            </div>
+
+            <div class="form-group">
+                <label for="passwordbox">Nova Senha:</label>
+                <input type="password" id="passwordbox" name="passwordbox" placeholder="Deixe em branco se não quiser alterar">
+            </div>
+
+            <div class="form-group">
+                <label for="confirmpasswordbox">Confirmar nova senha:</label>
+                <input type="password" id="confirmpasswordbox" name="confirmpasswordbox" placeholder="Deixe em branco se não quiser alterar">
+            </div>
+
+            <div class="button-container">
+                <input type="submit" value="Salvar Alterações">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
