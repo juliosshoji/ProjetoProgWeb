@@ -54,5 +54,18 @@
                 </div>
             </form>
         </div>
+        <script>
+           
+           document.getElementById('register').addEventListener('submit', function(event) {
+                event.preventDefault(); 
+    
+                const nome = document.getElementById('usernamebox').value; 
+
+                localStorage.setItem('player', nome);
+                window.location.href = 'TelaJogo.html';
+            
+           });
+        </script>
+
     </body>
 </html>

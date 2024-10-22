@@ -9,6 +9,9 @@
 
     <body>
 
+        
+
+
         <div class="bloco">
             <h1>Histórico de Partidas</h1>
             <table>
@@ -20,7 +23,7 @@
 
                 <tr>
                     <td>1º</td>
-                    <td>MarcoXD</td>
+                    <td class ="player_ranking"></td>
                     <td>6718 pontos</td>
                 </tr>
 
@@ -85,6 +88,11 @@
                 </a>
             </div>
         </div>
+        <script>
+            const player = localStorage.getItem('player');
+            document.getElementsByClassName('player_ranking')[0].innerText = player;
 
+
+        </script>
     </body>
 </html>
