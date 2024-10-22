@@ -209,17 +209,11 @@ function validateLoginInput(){
 
     const user = document.forms["login"]["usernamebox"].value;
     const password = document.forms["login"]["passwordbox"].value;
-
-
-
-    // Verifica se os campos estão vazios
     if (!user || !password) {
-        // Mostra uma mensagem solicitando a entrada correta
         alert("Usuário e senha não podem ser vazios. Por favor, preencha ambos.");
         window.location.href = "TelaLogin.html"
         return false;
     }
-    // Se os campos estiverem preenchidos, prossegue com o fluxo desejado
     window.location.href = "TelaJogo.html";
     return true;
 }
