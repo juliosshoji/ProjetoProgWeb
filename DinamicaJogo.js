@@ -273,3 +273,15 @@ function validateRegisterInput(){
 
     return true;
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Adiciona evento de clique ao botão de reiniciar
+    document.getElementById("restart-button").addEventListener("click", function() {
+        window.location.href = "./TelaJogo.html";
+    });
+
+    // Adiciona evento de clique ao botão de sair
+    document.getElementById("exit-button").addEventListener("click", function() {
+        window.location.href = "./TelaLogin.html";
+    });
+});
