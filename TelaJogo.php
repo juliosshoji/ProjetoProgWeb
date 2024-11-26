@@ -9,6 +9,15 @@
     <script src="./DinamicaJogo.js"></script>
 </head>
 <body >
+<<<<<<< HEAD:TelaJogo.html
+=======
+    <?php 
+        session_start();
+        if(!isset($_SESSION["username"])){
+            header("Location: ./TelaLogin.html");
+        }    
+    ?>
+>>>>>>> 983cdb5 (Finalizando):TelaJogo.php
     <div class="container-principal">
         <div class="subcontainer-jogo">
             <table id="tableJogo"></table>
@@ -40,13 +49,13 @@
         </div>
 
         <div class="subcontainer-footer">
-            <a href="./TelaFimDeJogo.html">
+            <a href="./TelaFimDeJogo.php">
                 <div class="button">Sair ou Reiniciar</div>
             </a>
-            <a href="./TelaRanking.html  ">
+            <a href="./TelaRanking.php">
                 <div class="button">Ranking Global</div>
             </a>
-            <a href="./TelaEditarInfo.html">
+            <a href="./TelaEditarInfo.php">
                 <div class="button">Editar Perfil</div>
             </a>
         </div>

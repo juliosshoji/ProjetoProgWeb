@@ -8,6 +8,12 @@
     <script src="./DinamicaJogo.js"></script>
 </head>
 <body>
+    <?php 
+        session_start();
+        if(!isset($_SESSION["username"])){
+            header("Location: ./TelaLogin.html");
+        }    
+    ?>
     <div class="container">
         <h1>Fim de Jogo</h1>
         <h2>Quer tentar novamente?</h2>
