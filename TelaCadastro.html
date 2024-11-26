@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="pt-BR">
@@ -12,7 +13,7 @@
         <div class="container">
             <h1 style="color: red;">Campo Minado</h1>
             <h2>Cadastre sua conta</h2>
-            <form name="register" onsubmit="return  validateRegisterInput()" action="TelaLogin.html">
+            <form id="registerForm" name="register" onsubmit="return validateRegisterInput(event)">
                 <div class="form-group">                
                     <label for="namebox">Nome Completo:</label>
                     <input type="text" id="namebox" name="namebox">
@@ -54,18 +55,5 @@
                 </div>
             </form>
         </div>
-        <script>
-           
-           document.getElementById('register').addEventListener('submit', function(event) {
-                event.preventDefault(); 
-    
-                const nome = document.getElementById('usernamebox').value; 
-
-                localStorage.setItem('player', nome);
-                window.location.href = 'TelaJogo.html';
-            
-           });
-        </script>
-
     </body>
 </html>
