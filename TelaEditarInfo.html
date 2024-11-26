@@ -8,93 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil - Campo Minado</title>
     <link rel="stylesheet" href="./StyleInformacoes.css">
-    <script>
-        let nomeAtual = "Neymar Junior";
-        let emailAtual = "neymar.njr@gmail.com";
-        let dataNascimentoAtual = "1992-02-05";
-        let cpfAtual = "123.456.789-00";
-        let telefoneAtual = "5511887654567";
-        let nomeUsuarioAtual = "NJR";
-
-        function carregarInformacoesAtuais() {
-            document.getElementById("namebox").value = nomeAtual;
-            document.getElementById("emailbox").value = emailAtual;
-            document.getElementById("birthdaybox").value = dataNascimentoAtual;
-            document.getElementById("cpfbox").value = cpfAtual;
-            document.getElementById("telefonebox").value = telefoneAtual;
-            document.getElementById("usernamebox").value = nomeUsuarioAtual;
-        }
-
-        function validarEntradas() {
-            const nome = document.getElementById("namebox").value;
-            const email = document.getElementById("emailbox").value;
-            const cpf = document.getElementById("cpfbox").value;
-            const telefone = document.getElementById("telefonebox").value;
-            const nomeUsuario = document.getElementById("usernamebox").value;
-            const senha = document.getElementById("passwordbox").value;
-            const confirmarSenha = document.getElementById("confirmpasswordbox").value;
-
-            if (!nome || !email || !cpf || !telefone || !nomeUsuario) {
-                alert("Por favor, preencha todos os campos obrigatórios.");
-                return false;
-            }
-
-            const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!regexEmail.test(email)) {
-                alert("Por favor, insira um e-mail válido.");
-                return false;
-            }
-
-            if (senha || confirmarSenha) {
-                if (senha !== confirmarSenha) {
-                    alert("As senhas não coincidem.");
-                    return false;
-                }
-            }
-
-            const regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-            if (!regexCPF.test(cpf)) {
-                alert("Por favor, insira um CPF válido no formato XXX.XXX.XXX-XX.");
-                return false;
-            }
-
-            const regexTelefone = /^\d{13}$/;
-            if (!regexTelefone.test(telefone)) {
-                alert("Por favor, insira um número de telefone válido com 13 dígitos, incluindo o código do país.");
-                return false;
-            }
-
-            return true;
-        }
-
-        function salvarAlteracoes(event) {
-            event.preventDefault();
-
-            if (!validarEntradas()) {
-                return;
-            }
-
-            nomeAtual = document.getElementById("namebox").value;
-            emailAtual = document.getElementById("emailbox").value;
-            dataNascimentoAtual = document.getElementById("birthdaybox").value;
-            cpfAtual = document.getElementById("cpfbox").value;
-            telefoneAtual = document.getElementById("telefonebox").value;
-            nomeUsuarioAtual = document.getElementById("usernamebox").value;
-
-            alert("Informações salvas com sucesso!");
-
-            window.location.href = "TelaJogo.html";
-        }
-
-        window.onload = carregarInformacoesAtuais;
-    </script>
+    <script src="./DinamicaJogo.js"></script>
 </head>
 
 <body>
     <div class="container">
         <h1 style="color: red;">Campo Minado</h1>
         <h2>Editar Perfil</h2>
-        <form name="editProfile" onsubmit="salvarAlteracoes(event)">
+        <form id="editForm" name="editProfile" onsubmit="salvarAlteracoes(event)">
             <div class="form-group">
                 <label for="namebox">Nome Completo:</label>
                 <input type="text" id="namebox" name="namebox">

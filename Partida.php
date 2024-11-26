@@ -1,4 +1,6 @@
 <?php
+
+    
     header('Content-Type: application/json');
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -18,11 +20,12 @@
     $status = $conn->real_escape_string($_POST["result"]);
     $points = $conn->real_escape_string($_POST["points"]);
 
-    $currentTime = date("Y-m-d H:i:s");
+    date_default_timezone_set("America/Sao_Paulo");
+    $currentTime = date("Y-m-d H:i:s", time());
     $sql = "SELECT id FROM usuarios WHERE usuario = '$username'";
     $result = $conn->query($sql);
 
-    $user_id = (int) $result->fetch_all()[0];
+    $user_id = (int) $result->fetch_assoc()["id"];
 
     $sql = "INSERT INTO partidas (usuario_id, dimensoes, qtdbombas, modalidade, tempo, dthora, resultado, pontos) VALUES (
         '$user_id',
@@ -38,7 +41,13 @@
 
     $result = $conn->query(query: $sql);
     if ($result) {
-        echo json_encode(value: ["sucess" => true]);
+        $sql = "UPDATE usuarios SET pontos = pontos + '$points' WHERE id = '$user_id'";
+        $result = $conn->query(query: $sql);
+        if($result){
+            echo json_encode(value: ["sucess" => true]);
+        } else {
+            echo json_encode(value: ["sucess"=> false, "eror" => "Game saved, but points not applied"]);
+        }
     }
     else {
         echo json_encode(value: ["sucess"=> false, "error" => "Could not save game"]);

@@ -1,5 +1,4 @@
-<?php
-
+<?php 
     session_start();
 
     header('Content-Type: application/json');
@@ -19,18 +18,14 @@
 
     $username = $_SESSION["username"];
 
-    $sql = "SELECT  u.nome, 
-    p.dimensoes, 
-    p.qtdbombas,
-    p.modalidade,
-    p.tempo,
-    p.resultado,
-    p.dthora
-    FROM
-    usuarios u 
-    INNER JOIN partidas p ON u.id = p.usuario_id
-    WHERE u.usuario = '$username'
-    ORDER BY p.dthora DESC";
+    $sql = "SELECT  nome, 
+    email,
+    dtnasc,
+    cpf,
+    telefone,
+    usuario
+    FROM usuarios
+    WHERE usuarios.usuario = '$username'";
 
     $result = $conn->query($sql);
     if ($result) {
@@ -39,15 +34,11 @@
         while($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
-        $vazio = true;
-        if(count($data) > 0){
-            $vazio = false;
-        }
-        echo json_encode(["sucess" => true, "partida" => $data, "vazio" => $vazio]);
+        echo json_encode(["sucess" => true, "info" => $data]);
     } else {
         echo json_encode(["sucess" => false, "error"=> "Error with query"]);
     }
 
-    $conn->close();
+    $conn->close(); 
 
 ?>

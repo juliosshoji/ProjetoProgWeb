@@ -27,11 +27,11 @@
             $pdo->exec("CREATE TABLE IF NOT EXISTS usuarios (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 nome VARCHAR(100) NOT NULL,
-                email VARCHAR(100) UNIQUE NOT NULL,
+                email VARCHAR(100) NOT NULL,
                 dtnasc DATE NOT NULL,
                 cpf CHAR(11) NOT NULL,
                 telefone CHAR(15) NOT NULL,
-                usuario VARCHAR(50) NOT NULL,
+                usuario VARCHAR(50) UNIQUE NOT NULL,
                 senha VARCHAR(255) NOT NULL,
                 pontos INT NOT NULL
             )");
@@ -48,6 +48,8 @@
                 pontos INT NOT NULL,
                 FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
             )");
+
+            $pdo->exec("SET @@global.time_zone = '-4:00'");
     
         } catch (PDOException $e) {
             die("Erro ao inicializar o banco de dados: " . $e->getMessage());
