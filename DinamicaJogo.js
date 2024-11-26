@@ -9,14 +9,6 @@ let rows = 0;
 let cols = 0;
 let victoryMark = false;
 
-<<<<<<< HEAD
-let numBombs = 0;
-let rows = 0;
-let cols = 0;
-let victoryMark = false;
-
-=======
->>>>>>> 983cdb5 (Finalizando)
 
 function startTimer() {
     const timeButton = document.querySelector('.button.tempo');
@@ -101,10 +93,6 @@ function createBoard(rows, cols, bombs) {
 }
 
 function revealCell(element, row, col, bombs) {
-<<<<<<< HEAD
-function revealCell(element, row, col, bombs) {
-=======
->>>>>>> 983cdb5 (Finalizando)
     if (!element.classList.contains('square-escondido')) {
         return;
     }
@@ -121,13 +109,12 @@ function revealCell(element, row, col, bombs) {
         } else {
             element.classList.add('square-sem-nada');
             propagateReveal(element, row, col, bombs);
-<<<<<<< HEAD
-            propagateReveal(element, row, col, bombs);
-=======
->>>>>>> 983cdb5 (Finalizando)
         }
 
         if (document.querySelectorAll('td.square-escondido').length === document.querySelectorAll('td[data-bomb="true"]').length) {
+            if(!victoryMark){
+                victory(); 
+            }
             if(!victoryMark){
                 victory(); 
             }
@@ -137,39 +124,20 @@ function revealCell(element, row, col, bombs) {
 
 function victory() {
     victoryMark = true;
-<<<<<<< HEAD
-    victoryMark = true;
-=======
->>>>>>> 983cdb5 (Finalizando)
     alert('Parabéns! Você venceu o jogo!');
     endGame();
 }
 
 function propagateReveal(element, row, col, bombs) {
     const [rowS, colS] = element.dataset.position.split(',').map(Number);
-<<<<<<< HEAD
-function propagateReveal(element, row, col, bombs) {
-    const [rowS, colS] = element.dataset.position.split(',').map(Number);
-=======
->>>>>>> 983cdb5 (Finalizando)
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
             const newRow = rowS + i;
             const newCol = colS + j;
             if (newRow >= 0 && newRow < row && newCol >= 0 && newCol < col) {
-<<<<<<< HEAD
-            const newRow = rowS + i;
-            const newCol = colS + j;
-            if (newRow >= 0 && newRow < row && newCol >= 0 && newCol < col) {
                 const neighbor = document.querySelector(`td[data-position="${newRow},${newCol}"]`);
                 if (neighbor && neighbor.classList.contains('square-escondido')) {
                     revealCell(neighbor, row, col, bombs);
-                    revealCell(neighbor, row, col, bombs);
-=======
-                const neighbor = document.querySelector(`td[data-position="${newRow},${newCol}"]`);
-                if (neighbor && neighbor.classList.contains('square-escondido')) {
-                    revealCell(neighbor, row, col, bombs);
->>>>>>> 983cdb5 (Finalizando)
                 }
             }
         }
@@ -182,15 +150,8 @@ function setupGame() {
         square.addEventListener('click', function() {
             const gameSizeInput = document.getElementById('tamanhoJogo').value;
             const [row, col] = gameSizeInput.split('x').map(Number);
-<<<<<<< HEAD
-            const [row, col] = gameSizeInput.split('x').map(Number);
             const bombs = new Set(Array.from(document.querySelectorAll('[data-bomb="true"]')).map(el => el.dataset.position));
             revealCell(square, row, col, bombs);
-            revealCell(square, row, col, bombs);
-=======
-            const bombs = new Set(Array.from(document.querySelectorAll('[data-bomb="true"]')).map(el => el.dataset.position));
-            revealCell(square, row, col, bombs);
->>>>>>> 983cdb5 (Finalizando)
         });
     });
 }
@@ -199,19 +160,9 @@ function startGame() {
 
 
 
-<<<<<<< HEAD
-
-
-
     const startButton = document.getElementById('botaoInicio');
     const rivotrilToggle = document.getElementById('botaoRivotril');
     victoryMark = false;
-    victoryMark = false;
-=======
-    const startButton = document.getElementById('botaoInicio');
-    const rivotrilToggle = document.getElementById('botaoRivotril');
-    victoryMark = false;
->>>>>>> 983cdb5 (Finalizando)
 
     if(startButton){
         startButton.addEventListener('click', function() {
@@ -243,39 +194,6 @@ function startGame() {
             rivotrilToggle.style.backgroundColor = rivotrilMode ? 'green' : '';
         });
     }   
-<<<<<<< HEAD
-    if(startButton){
-        startButton.addEventListener('click', function() {
-            const gameSizeInput = document.getElementById('tamanhoJogo').value;
-            [rows, cols] = gameSizeInput.split('x').map(Number);
-            numBombs = parseInt(document.getElementById('botaoBomba').value, 10);
-    
-            if (isNaN(rows) || isNaN(cols) || isNaN(numBombs)) {
-                alert('Por favor, insira um valor válido para o tamanho do jogo.');
-                return;
-            }
-    
-            const bombs = generateBombs(numBombs, rows, cols); 
-            createBoard(rows, cols, bombs); 
-            setupGame();
-    
-            if (rivotrilMode) {
-                const maxTime = rows * cols;
-                startCountdown(maxTime);
-            } else {
-                startTimer();
-            }
-            startButton.disabled = true;
-        });    
-    }
-    if(rivotrilToggle){
-        rivotrilToggle.addEventListener('click', function() {
-            rivotrilMode = !rivotrilMode;
-            rivotrilToggle.style.backgroundColor = rivotrilMode ? 'green' : '';
-        });
-    }   
-=======
->>>>>>> 983cdb5 (Finalizando)
 }
 
 function cheatMode() {
@@ -306,15 +224,9 @@ function endGame() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if(response.sucess){
-<<<<<<< HEAD
-                window.location.href = "./TelaFimDeJogo.html";
-            } else {
-                alert("Erro no servidor, partida não salva!");
-=======
                 window.location.href = "./TelaFimDeJogo.php";
             } else {
                 alert(response.error || "Erro no servidor, partida não salva!");
->>>>>>> 983cdb5 (Finalizando)
             }
         }
     };
@@ -355,38 +267,6 @@ function validateLoginInput(event){
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 if (response.success) {
-                    window.location.href = './TelaJogo.html';
-                } else {
-                    alert(response.message || 'Erro ao fazer login.');
-                }
-            } else {
-                alert('Erro na requisição. Tente novamente.');
-            }
-        };
-    
-        xhr.onerror = function () {
-            alert('Erro na conexão.');
-        };
-    
-        xhr.send(formData);
-}
-
-function validateRegisterInput(event){
-=======
-const containsLetters = (str) => /[a-zA-Z]/.test(str);
-
-function validateLoginInput(event){
-        event.preventDefault();
-    
-        const xhr = new XMLHttpRequest();
-        const form = document.getElementById('loginForm');
-        const formData = new FormData(form);
-    
-        xhr.open('POST', 'Login.php', true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                if (response.success) {
                     window.location.href = './TelaJogo.php';
                 } else {
                     alert(response.message || 'Erro ao fazer login.');
@@ -403,7 +283,6 @@ function validateLoginInput(event){
         xhr.send(formData);
 }
 
->>>>>>> 983cdb5 (Finalizando)
 function validateRegisterInput(event){
 
     const name = document.forms["register"]["namebox"].value;
@@ -435,8 +314,6 @@ function validateRegisterInput(event){
         alert("Não inclua caracteres no CPF!");
         return false;
     }
-<<<<<<< HEAD
-=======
     if(containsLetters(telefone)){
         alert("Telefone inválido, não inclua caracteres!");
         window.location.href = "TelaCadastro.html";
@@ -690,267 +567,11 @@ function validarEntradas() {
         return false;
     }
 
->>>>>>> 983cdb5 (Finalizando)
     if(containsLetters(telefone)){
         alert("Telefone inválido, não inclua caracteres!");
         window.location.href = "TelaCadastro.html";
         return false;
     }
-<<<<<<< HEAD
-
-    event.preventDefault();
-    
-    const xhr = new XMLHttpRequest();
-    const form = document.getElementById('registerForm');
-    const formData = new FormData(form);
-
-    xhr.open('POST', 'Cadastro.php', true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            const response = JSON.parse(xhr.responseText);
-            console.log(response);
-            if (response.success) {
-                window.location.href = 'TelaLogin.html';
-            } else {
-                alert(response.error || 'Erro ao cadastrar');
-            }
-        } else {
-            alert('Erro na requisição. Tente novamente.');
-        }
-    };
-    
-    xhr.onerror = function () {
-        alert('Erro na conexão.');
-    };
-    
-    xhr.send(formData);
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    const restartButton = document.getElementById("restart-button");
-    if(restartButton){
-        restartButton.addEventListener("click", function() {
-            window.location.href = "./TelaJogo.html";
-        });
-    }
-
-    const exitButton = document.getElementById("exit-button");
-    if(exitButton){
-        exitButton.addEventListener("click", function() {
-            if(window.location.pathname == "/ProjetoProgWeb/TelaFimDeJogo.html"){
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'Sair.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        const response = JSON.parse(xhr.responseText);
-                        if(!response.sucess){
-                            window.location.href = "./TelaLogin.html";
-                        } else {
-                            window.location.href = "./TelaJogo.html";
-                        }
-                    }
-                };
-
-                xhr.send('');
-            } else {
-                if(window.location.href == "/ProjetoProgWeb/TelaDeRanking.html"){
-                    window.location.href = "./TelaJogo.html";
-                }
-            }    
-        });
-    }
-    if(window.location.pathname !== "/ProjetoProgWeb/TelaLogin.html" && window.location.pathname !== "/ProjetoProgWeb/TelaCadastro.html"){
-        verifyLogin();
-    }
-    if(window.location.pathname === "/ProjetoProgWeb/TelaRanking.html"){
-        drawRanking();
-    }
-    if(window.location.pathname === "/ProjetoProgWeb/TelaEditarInfo.html"){
-        informacoesAtuais();
-    }
-
-    const historic = document.getElementById("historico");
-    if(historic !== null){
-        drawHistoric(historic);
-    }
-});
-
-function drawHistoric(historic){
-
-        const xhr = new XMLHttpRequest();
-    
-        xhr.open('POST', 'Historico.php', true);
-    
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                
-                    const data = JSON.parse(xhr.responseText);
-    
-                    
-                    if (!data.sucess) {
-                        historic.innerHTML = `<p>Erro: ${data.error}</p>`;
-                        return;
-                    }
-                    let html;
-                    if(!data.vazio){
-                        html = `<p>Histórico</p><br><p>Nome do player: ${data.partida[0].nome}</p><table>`;
-                        html += `
-                            <tr>
-                                <th>Dimensões</th>
-                                <th>Bombas</th>
-                                <th>Modalidade</th>
-                                <th>Tempo (h:m:s)</th>
-                                <th>Resultado</th>
-                                <th>Data/Hora</th>
-                            </tr>
-                        `;
-                        data.partida.forEach(partida => {
-                            html += `
-                                <tr>
-                                    <td>${partida.dimensoes}</td>
-                                    <td>${partida.qtdbombas}</td>
-                                    <td>${partida.modalidade}</td>
-                                    <td>${partida.tempo}</td>
-                                    <td>${partida.resultado}</td>
-                                    <td>${partida.dthora}</td>
-                                </tr>
-                            `;
-                        });
-                        html += '</table>';
-                        
-                    } else {
-                        html = `<p>Histórico</p><br><table>
-                            <td>Sem partidas</td>
-                        </table>`;
-                    }
-                    historic.innerHTML = html;
-            } else {
-                historic.innerHTML = `<p>Erro ao carregar os resultados. Código: ${xhr.status}</p>`;
-            }
-        };
-    
-        xhr.onerror = function () {
-            historic.innerHTML = `<p>Erro ao fazer a requisição.</p>`;
-        };
-    
-        xhr.send();
-
-}
-
-function verifyLogin(){
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'Verify.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                if(!response.sucess){
-                    alert("Usuário não autenticado");
-                    window.location.href = "./TelaLogin.html";
-                } 
-            }
-        };
-        xhr.send('');
-}
-
-function drawRanking(){
-
-    const ranking = document.getElementById("ranking");
-    if(!ranking){
-        return;
-    }
-
-    const xhr = new XMLHttpRequest();
-    
-        xhr.open('POST', 'RankingGlobal.php', true);
-    
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                
-                    const data = JSON.parse(xhr.responseText);
-    
-                    
-                    if (!data.sucess) {
-                        ranking.innerHTML = `<p>Erro: ${data.error}</p>`;
-                        return;
-                    }
-    
-                    let html = `<table>`;
-                    html += `
-                        <tr>
-                            <th>Colocação</th>
-                            <th>Nome</th>
-                            <th>Pontos</th>
-                        </tr>
-                    `;
-                    let index = 1;
-                    data.partida.forEach(partida => {
-                        html += `
-                            <tr>
-                                <td>${index}º</td>
-                                <td>${partida.nome}</td>
-                                <td>${partida.pontos}</td>
-                            </tr>
-                        `;
-                        index++;
-                    });
-    
-                    html += '</table>';
-                    ranking.innerHTML = html;
-                
-            } else {
-                ranking.innerHTML = `<p>Erro ao carregar os resultados. Código: ${xhr.status}</p>`;
-            }
-        };
-    
-        xhr.onerror = function () {
-            historic.innerHTML = `<p>Erro ao fazer a requisição.</p>`;
-        };
-    
-        xhr.send();
-}
-
-function validarEntradas() {
-    const nome = document.getElementById("namebox").value;
-    const email = document.getElementById("emailbox").value;
-    const cpf = document.getElementById("cpfbox").value;
-    const telefone = document.getElementById("telefonebox").value;
-    const nomeUsuario = document.getElementById("usernamebox").value;
-    const senha = document.getElementById("passwordbox").value;
-    const confirmarSenha = document.getElementById("confirmpasswordbox").value;
-
-    if (!nome || !email || !cpf || !telefone || !nomeUsuario) {
-        alert("Por favor, preencha todos os campos obrigatórios.");
-        return false;
-    }
-
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(email)) {
-        alert("Por favor, insira um e-mail válido.");
-        return false;
-    }
-
-    if (senha || confirmarSenha) {
-        if (senha !== confirmarSenha) {
-            alert("As senhas não coincidem.");
-            return false;
-        }
-    }
-
-    if(containsLetters(cpf)){
-        alert("Não inclua caracteres no CPF!");
-        return false;
-    }
-
-    if(containsLetters(telefone)){
-        alert("Telefone inválido, não inclua caracteres!");
-        window.location.href = "TelaCadastro.html";
-        return false;
-    }
-=======
->>>>>>> 983cdb5 (Finalizando)
 
     return true;
 }
@@ -974,11 +595,7 @@ function salvarAlteracoes(event) {
             const response = JSON.parse(xhr.responseText);
             if (response.success) {
                 console.log(response.newuser);
-<<<<<<< HEAD
-                window.location.href = './TelaJogo.html';
-=======
                 window.location.href = './TelaJogo.php';
->>>>>>> 983cdb5 (Finalizando)
             } else {
                 console.log(response);
                 alert(response.error || "Erro ao atualizar informações");

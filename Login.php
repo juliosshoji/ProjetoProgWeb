@@ -23,10 +23,6 @@ $sql = "SELECT * FROM usuarios WHERE usuario = '$username' AND senha = '$passwor
 $result = $conn->query($sql);
 
 if ($result->num_rows == 1) {
-<<<<<<< HEAD
-    setcookie("username", $username, time()+3600, "/");
-=======
->>>>>>> 983cdb5 (Finalizando)
     $_SESSION["username"] = $username;
     echo json_encode(["success" => true]);
 } else {
