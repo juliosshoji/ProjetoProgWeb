@@ -1,4 +1,7 @@
 <?php
+
+require_once "CampoMinado.php";
+
 header('Content-Type: application/json');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -21,6 +24,7 @@ $result = $conn->query($sql);
 if ($result->num_rows == 1) {
     // Successful login
     setcookie("username", $username, time()+3600, "/");
+    $_SESSION["username"] = $username;
     echo json_encode(["success" => true]);
 } else {
     // Failed login

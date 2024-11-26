@@ -152,6 +152,9 @@ function setupGame() {
 }
 
 function startGame() {
+
+
+
     const startButton = document.getElementById('botaoInicio');
     const rivotrilToggle = document.getElementById('botaoRivotril');
     victoryMark = false;
@@ -210,7 +213,7 @@ function endGame() {
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'Partida.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Envio estilo Form
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -345,23 +348,91 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const exitButton = document.getElementById("exit-button");
     if(exitButton){
-            exitButton.addEventListener("click", function() {
+        exitButton.addEventListener("click", function() {
+            console.log(window.location.href);
+            if(window.location.href === "http://localhost/ProjetoProgWeb/TelaFimDeJogo.html"){
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', 'Sair.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
                 xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    if(!response.sucess){
-                        window.location.href = "./TelaLogin.html";
-                    } else {
-                        window.location.href = "./TelaJogo.html";
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        if(!response.sucess){
+                            window.location.href = "./TelaLogin.html";
+                        } else {
+                            window.location.href = "./TelaJogo.html";
+                        }
                     }
-                }
-            };
+                };
 
-            xhr.send(''); // Envia os dados
+                xhr.send('');
+            } else {
+                if(window.location.href === "http://localhost/ProjetoProgWeb/TelaDeRanking.html"){
+                    window.location.href = "TelaJogo.html";
+                }
+            }    
         });
-    } 
+    }
+
+    const historic = document.getElementById("historico");
+    drawHistoric(historic);
 });
+
+function drawHistoric(historic){
+    
+        const xhr = new XMLHttpRequest();
+    
+        xhr.open('POST', 'Historico.php', true);
+    
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                
+                    const data = JSON.parse(xhr.responseText);
+    
+                    
+                    if (!data.sucess) {
+                        historic.innerHTML = `<p>Erro: ${data.error}</p>`;
+                        return;
+                    }
+    
+                    let html = `<p>Nome do player: ${data.partida[0].nome}</p><table>`;
+                    html += `
+                        <tr>
+                            <th>Dimensões</th>
+                            <th>Bombas</th>
+                            <th>Modalidade</th>
+                            <th>Tempo (h:m:s)</th>
+                            <th>Resultado</th>
+                            <th>Data/Hora</th>
+                        </tr>
+                    `;
+    
+                    data.partida.forEach(partida => {
+                        html += `
+                            <tr>
+                                <td>${partida.dimensoes}</td>
+                                <td>${partida.qtdbombas}</td>
+                                <td>${partida.modalidade}</td>
+                                <td>${partida.tempo}</td>
+                                <td>${partida.resultado}</td>
+                                <td>${partida.dthora}</td>
+                            </tr>
+                        `;
+                    });
+    
+                    html += '</table>';
+                    historic.innerHTML = html;
+                
+            } else {
+                historic.innerHTML = `<p>Erro ao carregar os resultados. Código: ${xhr.status}</p>`;
+            }
+        };
+    
+        xhr.onerror = function () {
+            historic.innerHTML = `<p>Erro ao fazer a requisição.</p>`;
+        };
+    
+        xhr.send();
+
+}
