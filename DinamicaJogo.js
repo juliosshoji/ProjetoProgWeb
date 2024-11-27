@@ -9,12 +9,6 @@ let rows = 0;
 let cols = 0;
 let victoryMark = false;
 
-let numBombs = 0;
-let rows = 0;
-let cols = 0;
-let victoryMark = false;
-
-
 function startTimer() {
     const timeButton = document.querySelector('.button.tempo');
     elapsedTime = 0; 
