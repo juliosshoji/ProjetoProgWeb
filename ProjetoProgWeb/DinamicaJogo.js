@@ -261,7 +261,7 @@ function validateLoginInput(event){
                 if (response.success) {
                     window.location.href = './TelaJogo.php';
                 } else {
-                    alert(response.message || 'Erro ao fazer login.');
+                    alert(response.error || 'Erro ao fazer login.');
                 }
             } else {
                 alert('Erro na requisição. Tente novamente.');
