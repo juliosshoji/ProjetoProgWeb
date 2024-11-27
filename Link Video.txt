@@ -14,4 +14,4 @@ Se estiver rodando localmente, utilize "http://localhost/ProjetoProgWeb/TelaLogi
 
 Faça o cadastro, faça o login e aproveite o jogo.
 
-Link do vídeo:
+Link do vídeo: https://youtu.be/42NOiuS6L5g

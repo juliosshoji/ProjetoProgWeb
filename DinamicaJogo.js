@@ -321,7 +321,6 @@ function validateRegisterInput(event){
     xhr.onload = function () {
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
-            console.log(response);
             if (response.success) {
                 window.location.href = './TelaLogin.html';
             } else {
