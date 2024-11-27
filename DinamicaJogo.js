@@ -41,9 +41,9 @@ function startCountdown(duration) {
     }, 1000);
 }
 
-function generateBombs(numBombs, rows, cols) {
+function generateBombs(numBomb, rows, cols) {
     const bombs = new Set();
-    while (bombs.size < numBombs) {
+    while (bombs.size < numBomb) {
         const randomRow = Math.floor(Math.random() * rows);
         const randomCol = Math.floor(Math.random() * cols);
         const position = `${randomRow},${randomCol}`;
