@@ -1,6 +1,0 @@
-Utilizar servidor capaz de rodar PHP.
-
-Iniciar na TelaLogin.html
-
-Para o Banco de Dados modificar nas requisições de conexão o username, hostname e password conforme o necessário.
-Como default está "localhost", "root" e "".
