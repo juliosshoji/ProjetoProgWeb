@@ -2,6 +2,7 @@
 
     require "credentials.php";
 
+    session_start();
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
@@ -20,7 +21,7 @@
         die(json_encode(["sucess" => false, "error" => "Conexão com Banco de Dados falhou: " . $conn->connect_error]));
     }
 
-    $username = $_COOKIE["username"];
+    $username = $_SESSION["username"];
     $dimensions = $conn->real_escape_string($_POST["dimensions"]);
     $bombqtd = (int) $conn->real_escape_string($_POST["bombqtd"]);
     $modality = $conn->real_escape_string($_POST["modality"]);
@@ -32,6 +33,9 @@
     $currentTime = date("Y-m-d H:i:s", time());
     $sql = "SELECT id FROM usuarios WHERE usuario = '$username'";
     $result = $conn->query($sql);
+    if($result->num_rows !== 1){
+        die(json_encode(["sucess"=> false,"error"=> "Usuario nao encontrado"]));
+    }
 
     $user_id = (int) $result->fetch_assoc()["id"];
 
@@ -43,7 +47,7 @@
         '$time',
         '$currentTime',
         '$status',
-        $points
+        '$points'
         )
     ";
 
@@ -54,7 +58,7 @@
         if($result){
             echo json_encode(value: ["sucess" => true]);
         } else {
-            echo json_encode(value: ["sucess"=> false, "eror" => "Jogo salve, mas pontos não aplicados"]);
+            echo json_encode(value: ["sucess"=> false, "eror" => "Jogo salvo, mas pontos não aplicados"]);
         }
     }
     else {

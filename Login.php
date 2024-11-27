@@ -1,9 +1,6 @@
 <?php
 
 require "CampoMinado.php";
-require "credentials.php";
-
-session_start();
 
 header('Content-Type: application/json');
 ini_set('display_errors', 1);

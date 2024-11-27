@@ -1,9 +1,7 @@
 <?php 
 
-    session_start();
-
     require "credentials.php";
-
+    session_start();
     header('Content-Type: application/json');
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);

@@ -8,7 +8,7 @@
     <script src="./DinamicaJogo.js"></script>
 </head>
 <body>
-    <?php 
+    <?php
         session_start();
         if(!isset($_SESSION["username"])){
             header("Location: ./TelaLogin.html");

@@ -261,7 +261,7 @@ function validateLoginInput(event){
                 if (response.success) {
                     window.location.href = './TelaJogo.php';
                 } else {
-                    alert(response.message || 'Erro ao fazer login.');
+                    alert(response.error || 'Erro ao fazer login.');
                 }
             } else {
                 alert('Erro na requisição. Tente novamente.');
@@ -302,13 +302,12 @@ function validateRegisterInput(event){
         alert("As senhas não coincidem!");
         return false;
     }
-    if(containsLetters(cpf)){
+    if(containsLetters(cpf) || cpf.includes("-") || cpf.includes(".")  ){
         alert("Não inclua caracteres no CPF!");
         return false;
     }
-    if(containsLetters(telefone)){
+    if(containsLetters(telefone) || telefone.includes("+") || telefone.includes("-") || telefone.includes(" ")){
         alert("Telefone inválido, não inclua caracteres!");
-        window.location.href = "TelaCadastro.html";
         return false;
     }
 
@@ -324,7 +323,7 @@ function validateRegisterInput(event){
             const response = JSON.parse(xhr.responseText);
             console.log(response);
             if (response.success) {
-                window.location.href = 'TelaLogin.html';
+                window.location.href = './TelaLogin.html';
             } else {
                 alert(response.error || 'Erro ao cadastrar');
             }
@@ -554,16 +553,14 @@ function validarEntradas() {
         }
     }
 
-    if(containsLetters(cpf)){
+    if(containsLetters(cpf) || cpf.includes("-") || cpf.includes(".")){
         alert("Não inclua caracteres no CPF!");
         return false;
     }
-
-    if(containsLetters(telefone)){
+    if(containsLetters(telefone) || telefone.includes("+") || telefone.includes("-") || telefone.includes(" ")){
         alert("Telefone inválido, não inclua caracteres!");
         return false;
     }
-
     return true;
 }
 
