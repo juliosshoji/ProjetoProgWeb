@@ -1,0 +1,17 @@
+Certifique-se que o arquivo credentials.php contenha todas as credenciais corretas para entrar no Banco de Dados.
+    - DB_HOST: endereço IP de onde o BD está localizado.
+    - DB_NAME: nome do Banco de Dados a ser utilizado/criado.
+    - DB_USER: nome de usuário para logar no mysql
+    - DB_PASSWORD: senha do usuário para logar no mysql
+
+Salve o arquivo credentials.php
+
+Coloque a pasta que contém o código-fonte dentro da pasta htdocs do XAMPP.
+
+Inicialize os serviços do apache e do mysql no XAMPP.
+
+Se estiver rodando localmente, utilize "http://localhost/ProjetoProgWeb/TelaLogin.html" para inicializar o site.
+
+Faça o cadastro, faça o login e aproveite o jogo.
+
+Link do vídeo:
